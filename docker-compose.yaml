@@ -1,0 +1,17 @@
+version: '3.7'
+services:
+  postgres_local_db:
+    image: postgres:latest
+    hostname: postgres-server
+    container_name: workshop-db
+    expose:
+      - "5432"
+    ports:
+      - "5432:5432"
+    networks:
+      - default
+    environment:
+      # Password is only used for local development!
+      - "POSTGRES_PASSWORD=Password1!"
+      - "POSTGRES_USER=postgres"
+      - "POSTGRES_DB=workshop-db"

@@ -1,0 +1,26 @@
+{
+  "name": "workshop-api",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/workshop-api/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "dependsOn": ["build"],
+      "options": {
+        "buildTarget": "workshop-api:build",
+        "runBuildTargetDependencies": false
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "workshop-api:build:development"
+        },
+        "production": {
+          "buildTarget": "workshop-api:build:production"
+        }
+      }
+    }
+  }
+}
