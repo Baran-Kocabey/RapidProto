@@ -20,4 +20,5 @@ export class AppointmentsEntity implements Appointment {
   @Column()
   vehicleRegNo: string;
 
+
 }

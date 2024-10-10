@@ -2,7 +2,7 @@ version: '3.7'
 services:
   postgres_local_db:
     image: postgres:latest
-    hostname: postgres-server
+    hostname: localhost
     container_name: workshop-db
     expose:
       - "5432"

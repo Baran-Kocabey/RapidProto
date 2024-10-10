@@ -4,8 +4,11 @@
   "license": "MIT",
   "scripts": {
     "start:api": "nx run workshop-api:serve:development",
-    "start:ui": "nx run workshop-ui:serve:development",
-    "typeorm:workshop-api:query": "ts-node -P ./apps/workshop-api/tsconfig.app.json ./node_modules/typeorm/cli.js-d apps/workshop-api/ormConfig.ts query"
+    "start:ui": "nx run workshop-ui:serve",
+    "typeorm:workshop-api:query": "ts-node -P ./apps/workshop-api/tsconfig.app.json ./node_modules/.bin/typeorm -d apps/workshop-api/ormConfig.ts query",
+    "typeorm:workshop-api:migration:create": "ts-node -P ./apps/workshop-api/tsconfig.app.json ./node_modules/.bin/typeorm migration:create",
+    "typeorm:workshop-api:migration:run": "ts-node -P ./apps/workshop-api/tsconfig.app.json ./node_modules/.bin/typeorm -d apps/workshop-api/ormConfig.ts migration:run",
+    "typeorm:workshop-api:migration:revert": "ts-node -P ./apps/workshop-api/tsconfig.app.json ./node_modules/.bin/typeorm -d apps/workshop-api/ormConfig.ts migration:revert"
   },
   "private": true,
   "dependencies": {

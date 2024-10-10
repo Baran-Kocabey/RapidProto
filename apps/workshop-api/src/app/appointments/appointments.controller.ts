@@ -9,7 +9,7 @@ export class AppointmentsController {
 
   @Get()
   getAllApointments(): Promise<Appointment[]> {
-    throw this.appointmentService.getAll();
+    return this.appointmentService.getAll();
   }
 
   @Get(':id')
@@ -34,4 +34,5 @@ export class AppointmentsController {
       throw new HttpException(e?.message, HttpStatus.NOT_FOUND);
     }
   }
+  
 }
