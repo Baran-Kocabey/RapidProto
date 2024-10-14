@@ -7,8 +7,8 @@
     "start:ui": "nx run workshop-ui:serve",
     "typeorm:workshop-api:query": "ts-node -P ./apps/workshop-api/tsconfig.app.json ./node_modules/.bin/typeorm -d apps/workshop-api/ormConfig.ts query",
     "typeorm:workshop-api:migration:create": "ts-node -P ./apps/workshop-api/tsconfig.app.json ./node_modules/.bin/typeorm migration:create",
-    "typeorm:workshop-api:migration:run": "ts-node -P ./apps/workshop-api/tsconfig.app.json ./node_modules/.bin/typeorm -d apps/workshop-api/ormConfig.ts migration:run",
-    "typeorm:workshop-api:migration:revert": "ts-node -P ./apps/workshop-api/tsconfig.app.json ./node_modules/.bin/typeorm -d apps/workshop-api/ormConfig.ts migration:revert"
+    "typeorm:workshop-api:migration:run": "ts-node -P ./apps/workshop-api/tsconfig.app.json ./node_modules/typeorm/cli.js -d apps/workshop-api/ormConfig.ts migration:run",
+    "typeorm:workshop-api:migration:revert": "ts-node -P ./apps/workshop-api/tsconfig.app.json ./node_modules/typeorm/cli.js -d apps/workshop-api/ormConfig.ts migration:revert"
   },
   "private": true,
   "dependencies": {
@@ -43,6 +43,8 @@
     "@eslint/js": "^9.8.0",
     "@nestjs/schematics": "^10.0.1",
     "@nestjs/testing": "^10.0.2",
+    "@nx-tools/container-metadata": "^6.0.2",
+    "@nx-tools/nx-container": "^6.0.4",
     "@nx/angular": "^19.8.0",
     "@nx/eslint": "19.8.0",
     "@nx/eslint-plugin": "19.8.0",

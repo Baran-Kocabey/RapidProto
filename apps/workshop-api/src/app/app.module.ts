@@ -16,7 +16,7 @@ const config = getConfig()
     password: config.get('dbPassword'),
     database: config.get('dbName'),
     autoLoadEntities: true,
-    synchronize: false,
+    synchronize: true,
   }),
     TypeOrmModule.forFeature([AppointmentsEntity]),
   ],

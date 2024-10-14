@@ -4,6 +4,8 @@ services:
     image: postgres:latest
     hostname: localhost
     container_name: workshop-db
+    volumes:
+      - "./db/init.sql:/docker-entrypoint-initdb.d/init.sql"
     expose:
       - "5432"
     ports:
@@ -15,3 +17,37 @@ services:
       - "POSTGRES_PASSWORD=Password1!"
       - "POSTGRES_USER=postgres"
       - "POSTGRES_DB=workshop-db"
+
+  workshop-ui:
+      image: library/workshop-ui
+      hostname: workshop-ui
+      container_name: workshop-ui
+      expose:
+        - "8080"
+      ports:
+        - "8080:8080"
+      networks:
+        - default
+     
+      environment:
+        - "BACKEND_URI=http://workshop-api:3000"
+
+  workshop-api:
+    image: library/workshop-api
+    hostname: workshop-api
+    container_name: workshop-api
+    depends_on:
+      - postgres_local_db
+    expose:
+      - "3000"
+    ports:
+      - "3000:3000"
+    networks:
+      - default
+    
+    environment:
+      - "DB_HOST=workshop-db"
+      - "DB_PORT=5432"
+      - "DB_NAME=workshop-db"
+      - "DB_USER=postgres"
+      - "DB_PASSWORD=Password1!"
