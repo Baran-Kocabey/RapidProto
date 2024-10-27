@@ -36,4 +36,15 @@ export class AppointmentsService {
     await this.appointmentsRepo.save(patchedAppointment)
     return patchedAppointment;
   }
+  async createAppointment(appointment: Appointment): Promise<Appointment> {
+    const start = openingHoursPerBranch[appointment.branch].openingHoursStart;
+    const end = openingHoursPerBranch[appointment.branch].openingHoursEnd;
+
+    if (!isTimeInInterval(appointment.time, start, end)) {
+      throw new Error(`The time ${appointment.time} of the appointment is not within the opening hours (${start} - ${end})`);
+    }
+
+    const newAppointment = this.appointmentsRepo.create(appointment);
+    return await this.appointmentsRepo.save(newAppointment);
+  }
 }
