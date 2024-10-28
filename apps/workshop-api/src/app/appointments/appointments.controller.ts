@@ -12,6 +12,16 @@ export class AppointmentsController {
     return this.appointmentService.getAll();
   }
 
+  @Post()
+  async createAppointment(@Body() appointment: Appointment): Promise<Appointment> {
+    try {
+      return await this.appointmentService.createAppointment(appointment);
+    } catch (e) {
+      throw new HttpException(e?.message, HttpStatus.BAD_REQUEST);
+    }
+  }
+
+
   @Get(':id')
   async getAppointmentById(@Param('id', ParseIntPipe) id: number) {
     const canidate = await this.appointmentService.getById(id);
@@ -35,14 +45,8 @@ export class AppointmentsController {
     }
   }
 
-  @Post()
-  async createAppointment(@Body() appointment: Appointment): Promise<Appointment> {
-    try {
-      return await this.appointmentService.createAppointment(appointment);
-    } catch (e) {
-      throw new HttpException(e?.message, HttpStatus.BAD_REQUEST);
-    }
-  }
+  
+  
 }
   
 
