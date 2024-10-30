@@ -36,6 +36,7 @@ export class AppointmentsService {
     await this.appointmentsRepo.save(patchedAppointment)
     return patchedAppointment;
   }
+
   async createAppointment(appointment: Appointment): Promise<Appointment> {
     const start = openingHoursPerBranch[appointment.branch].openingHoursStart;
     const end = openingHoursPerBranch[appointment.branch].openingHoursEnd;
@@ -47,4 +48,15 @@ export class AppointmentsService {
     const newAppointment = this.appointmentsRepo.create(appointment);
     return await this.appointmentsRepo.save(newAppointment);
   }
+
+  async deleteAppointment(id: number): Promise<void> {
+    const appointment = await this.appointmentsRepo.findOne({ where: { id } });
+  
+    if (!appointment) {
+      throw new Error(`Appointment with ID ${id} not found.`);
+    }
+  
+    await this.appointmentsRepo.remove(appointment);
+  }
+  
 }

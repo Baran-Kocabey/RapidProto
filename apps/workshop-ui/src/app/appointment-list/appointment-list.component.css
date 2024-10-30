@@ -1,0 +1,85 @@
+.list-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+.list-container h2 {
+  color: #333;
+  font-family: Arial, sans-serif;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.list-container ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.appointment-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.appointment-item:last-child {
+  border-bottom: none;
+}
+
+.appointment-details {
+  text-align: left;
+  flex: 1;
+  font-size: 16px;
+  color: #333;
+}
+
+.button-group {
+  display: flex;
+  gap: 8px;
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.edit-button svg {
+  fill: #28a745; /* Green for edit */
+}
+
+.delete-button svg {
+  fill: #dc3545; /* Red for delete */
+}
+
+.icon-button:hover .edit-button svg {
+  fill: #218838; /* Darker green on hover */
+}
+
+.icon-button:hover .delete-button svg {
+  fill: #c82333; /* Darker red on hover */
+}
+
+.add-button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+.add-button:hover {
+  background-color: #0056b3;
+}

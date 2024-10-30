@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpException, HttpStatus, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpException, HttpStatus, Param, ParseIntPipe, Patch, Post, Delete} from '@nestjs/common';
 import { Appointment } from '@my-workspace/api-interfaces';
 import { AppointmentsService } from './appointments.service';
 
@@ -45,8 +45,16 @@ export class AppointmentsController {
     }
   }
 
+  @Delete(':id')
+  async deleteAppointment(@Param('id') id: number): Promise<void> {
+    try {
+      await this.appointmentService.deleteAppointment(id);
+    } catch (e) {
+      throw new HttpException(e.message, HttpStatus.NOT_FOUND);
+    }
+  }
   
-  
+
 }
   
 

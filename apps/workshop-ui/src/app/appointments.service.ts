@@ -46,4 +46,13 @@ export class AppointmentsService {
   getOpeningHoursPerBranch(): Observable<OpeningHoursPerBranch> {
     return of(this.openingHoursPerBranch);
   }
+
+  createAppointment(appointment: Appointment): Observable<Appointment> {
+    return this.httpClient.post<Appointment>('workshop-api/appointments', appointment);
+  }
+
+  deleteAppointment(id: number): Observable<void> {
+    return this.httpClient.delete<void>(`workshop-api/appointments/${id}`);
+  }
+  
 }
