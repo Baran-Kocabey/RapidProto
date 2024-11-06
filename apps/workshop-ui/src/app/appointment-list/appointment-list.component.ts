@@ -14,22 +14,30 @@ import { AuthService } from '../core/auth/auth.service';
   <div class="list-container">
     <h2>Appointments</h2>
     <ul>
-      <li *ngFor="let appointment of appointments$ | async">
-        <span>{{ appointment.vehicleOwner }} - {{ appointment.branch }}</span>
-        <button *ngIf="appointment?.id && authService.canEditOrDelete(appointment.userId!)" 
-        (click)="editAppointment(appointment.id!)">
-        Edit
-      </button>
-      <button *ngIf="appointment?.id && authService.canEditOrDelete(appointment.userId!)" 
-              (click)="deleteAppointment(appointment.id!)">
-        Delete
-      </button>
-
+      <li *ngFor="let appointment of appointments$ | async" class="appointment-item">
+        <span class="appointment-details">{{ appointment.vehicleOwner }} - {{ appointment.branch }}</span>
+        <div class="button-group">
+          <button *ngIf="appointment?.id && authService.canEditOrDelete(appointment.userId!)" 
+                  (click)="editAppointment(appointment.id!)"
+                  class="icon-button edit-button">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M3 17.25V21h3.75l11.09-11.09-3.75-3.75L3 17.25zm17.71-10.04c.39-.39.39-1.02 0-1.41l-2.54-2.54c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+            </svg>
+          </button>
+          <button *ngIf="appointment?.id && authService.canEditOrDelete(appointment.userId!)" 
+                  (click)="deleteAppointment(appointment.id!)"
+                  class="icon-button delete-button">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M3 6h18v2H3V6zm3 4h12v12H6V10zm3-8h6v2H9V2zm2 4v12h2V6h-2z"/>
+            </svg>
+          </button>
+        </div>
       </li>
     </ul>
-    <button routerLink="/add-appointment">Add New Appointment</button>
+    <button routerLink="/add-appointment" class="add-button">Add New Appointment</button>
   </div>
-`,
+  `,
+  styleUrls: ['./appointment-list.component.css']
 })
 export class AppointmentListComponent {
   appointments$!: Observable<Appointment[]>;

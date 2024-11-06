@@ -13,11 +13,11 @@ import { FormsModule } from '@angular/forms';
       <h2>Login</h2>
       <form (ngSubmit)="onLogin()">
         <div>
-          <label for="username">Username:</label>
+          <label for="username">Username: </label>
           <input type="text" id="username" [(ngModel)]="username" name="username" required>
         </div>
         <div>
-          <label for="password">Password:</label>
+          <label for="password">Password: </label>
           <input type="password" id="password" [(ngModel)]="password" name="password" required>
         </div>
         <button type="submit">Login</button>

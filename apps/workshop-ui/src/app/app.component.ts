@@ -12,7 +12,6 @@ import { NxWelcomeComponent } from './nx-welcome.component';
     </header>
     <body>
       <ol>
-        <p><a routerLink="/appointments">All Appointments</a></p>
         <router-outlet></router-outlet>
       </ol>
     </body>

@@ -9,13 +9,14 @@ create table if not exists public.appointments_entity
   status         varchar not null,
   time           varchar not null,
   "vehicleOwner" varchar not null,
-  "vehicleRegNo" varchar not null
+  "vehicleRegNo" varchar not null,
+  userId       integer not null
 );
 
 alter table public.appointments_entity
   owner to postgres;
 
-INSERT INTO appointments_entity (assignment, branch, date, id, status, time, "vehicleOwner", "vehicleRegNo")
+INSERT INTO appointments_entity (assignment, branch, date, id, status, time, "vehicleOwner", "vehicleRegNo", userId)
 VALUES ('000-000-01', 'Dortmund', '2023-03-15', 1, 'Reparatur', '07:00', 'Sascha', 'ES-WW-01');
-INSERT INTO appointments_entity (assignment, branch, date, id, status, time, "vehicleOwner", "vehicleRegNo")
+INSERT INTO appointments_entity (assignment, branch, date, id, status, time, "vehicleOwner", "vehicleRegNo", userId)
 VALUES ('000-000-02', 'Berlin', '2023-03-15', 2, 'Abholung', '08:00', 'Tobi', 'B-WW-23');

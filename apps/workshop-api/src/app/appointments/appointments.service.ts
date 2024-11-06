@@ -45,6 +45,10 @@ export class AppointmentsService {
       throw new Error(`The time ${appointment.time} of the appointment is not within the opening hours (${start} - ${end})`);
     }
 
+    if (!appointment.userId) {
+      throw new Error('UserId is required to create an appointment');
+    }
+
     const newAppointment = this.appointmentsRepo.create(appointment);
     return await this.appointmentsRepo.save(newAppointment);
   }

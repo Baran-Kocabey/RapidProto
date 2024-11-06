@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { Appointment } from '@my-workspace/api-interfaces';
 import { AppointmentsService } from '../appointments.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../core/auth/auth.service';
 
 @Component({
   selector: 'workshop-add-appointment',
@@ -11,6 +12,10 @@ import { ActivatedRoute, Router } from '@angular/router';
   imports: [CommonModule, ReactiveFormsModule],
   template: `
     <div class="form-container">
+      <div class="mb-2">
+        <a class="back-link" (click)="goToList()">Back to list</a>
+      </div>
+      
       <h2>{{ isEditMode ? 'Edit Appointment' : 'Add New Appointment' }}</h2>
       <form [formGroup]="appointmentForm" (ngSubmit)="onSubmit()">
         <div class="form-field">
@@ -62,6 +67,7 @@ export class AddAppointmentComponent implements OnInit {
     private fb: FormBuilder,
     private appointmentsService: AppointmentsService,
     private router: Router,
+    private authService: AuthService,
     private route: ActivatedRoute
   ) {
     this.appointmentForm = this.fb.group({
@@ -94,11 +100,21 @@ export class AddAppointmentComponent implements OnInit {
     });
   }
 
+  goToList(): void {
+    this.router.navigate(['/appointments']); 
+  }
+
   onSubmit() {
     if (this.appointmentForm.valid) {
+
+      const currentUser = this.authService.getCurrentUser();
+
       const appointmentData: Appointment = {
         ...this.appointmentForm.value,
+        userId: currentUser?.id 
       };
+      
+  console.log(appointmentData);
 
       if (this.isEditMode && this.appointmentId) {
         // Update existing appointment

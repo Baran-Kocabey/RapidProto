@@ -19,7 +19,7 @@ export class AppointmentsEntity implements Appointment {
   vehicleOwner: string;
   @Column()
   vehicleRegNo: string;
-  @Column()
-  userId: number;
+  @Column({ nullable: true })
+  userId?: number;
 
 }
