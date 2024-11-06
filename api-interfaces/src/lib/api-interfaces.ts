@@ -7,6 +7,7 @@ export interface Appointment {
   status: string;
   date: string;
   time: string;
+  userId: number;
 }
 
 export interface OpeningHours {
