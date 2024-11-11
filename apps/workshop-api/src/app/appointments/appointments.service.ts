@@ -31,7 +31,7 @@ export class AppointmentsService {
     const end = openingHoursPerBranch[patchedAppointment.branch].openingHoursEnd;
 
     if (false === isTimeInInterval(patchedAppointment.time, start, end)) {
-      throw new Error(`The time ${patchedAppointment.time} of the appointment is not within the opening hours (${start} - ${end})`);
+      throw new Error(`Um ${patchedAppointment.time}Uhr ist unsere Werkstatt geschlossen (${start} - ${end})`);
     }
     await this.appointmentsRepo.save(patchedAppointment)
     return patchedAppointment;
@@ -42,7 +42,7 @@ export class AppointmentsService {
     const end = openingHoursPerBranch[appointment.branch].openingHoursEnd;
 
     if (!isTimeInInterval(appointment.time, start, end)) {
-      throw new Error(`The time ${appointment.time} of the appointment is not within the opening hours (${start} - ${end})`);
+      throw new Error(`Um ${appointment.time}Uhr ist unsere Werkstatt geschlossen (${start} - ${end})`);
     }
 
     if (!appointment.userId) {

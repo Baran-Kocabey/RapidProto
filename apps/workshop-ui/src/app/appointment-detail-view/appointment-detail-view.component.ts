@@ -71,11 +71,13 @@ import { OpeningHoursValidatorService } from '../appointments/opening-hours-vali
             formControlName="assignment"
             class="form-control"
           >
+            <option value="">Select a Assignment</option>
             <option value="Motorwartung">Motorwartung</option>
             <option value="Karosseriearbeiten">Karosseriearbeiten</option>
             <option value="Lackierung">Lackierung</option>
             <option value="Elektrik">Elektrik</option>
             <option value="Spurvermessung">Spurvermessung</option>
+            <option value="Sonstiges">Sonstiges</option>
           </select>
           <span class="error" *ngIf="form.controls['branch'].invalid"
             >Please select a branch</span
@@ -96,8 +98,10 @@ import { OpeningHoursValidatorService } from '../appointments/opening-hours-vali
         <div class="form-group">
           <label for="status">Status</label>
           <select id="status" formControlName="status" class="form-control">
-            <option value="Reperatur">Repair</option>
-            <option value="Abholung">Ready for Pickup</option>
+            <option value="">Select a status</option>
+            <option value="In Bearbeitung">In Bearbeitung</option>
+            <option value="Ausstehend">Ausstehend</option>
+            <option value="Abgeschlossen">Abgeschlossen</option>
           </select>
         </div>
 
@@ -192,8 +196,11 @@ export class AppointmentDetailViewComponent {
   }
 
   save() {
-    this.form.value
-    this.appointmentSave.emit(this.form.value);
-    console.log('saving value %o', this.form.value)
+    if (this.form.valid) {
+      this.appointmentSave.emit(this.form.value);
+    } else {
+      alert('Form is invalid. Please correct the errors.');
+    }
   }
+  
 }

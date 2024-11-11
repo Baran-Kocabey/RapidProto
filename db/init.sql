@@ -1,3 +1,4 @@
+-- SQLBook: Code
 create table if not exists public.appointments_entity
 (
   assignment     varchar not null,

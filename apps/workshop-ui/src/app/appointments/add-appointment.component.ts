@@ -18,9 +18,17 @@ import { AuthService } from '../core/auth/auth.service';
       
       <h2>{{ isEditMode ? 'Edit Appointment' : 'Add New Appointment' }}</h2>
       <form [formGroup]="appointmentForm" (ngSubmit)="onSubmit()">
-        <div class="form-field">
+         <div class="form-field">
           <label>Assignment:</label>
-          <input formControlName="assignment" required>
+          <select formControlName="assignment" required>
+            <option value="">Select a Assignment</option>
+            <option value="Motorwartung">Motorwartung</option>
+            <option value="Karosseriearbeiten">Karosseriearbeiten</option>
+            <option value="Lackierung">Lackierung</option>
+            <option value="Elektrik">Elektrik</option>
+            <option value="Spurvermessung">Spurvermessung</option>
+            <option value="Sonstiges">Sonstiges</option>
+          </select>
         </div>
         <div class="form-field">
           <label>Branch:</label>
@@ -40,7 +48,12 @@ import { AuthService } from '../core/auth/auth.service';
         </div>
         <div class="form-field">
           <label>Status:</label>
-          <input formControlName="status" required>
+          <select formControlName="status" required>
+            <option value="">Select a status</option>
+            <option value="In Bearbeitung">In Bearbeitung</option>
+            <option value="Ausstehend">Ausstehend</option>
+            <option value="Abgeschlossen">Abgeschlossen</option>
+          </select>
         </div>
         <div class="form-field">
           <label>Date:</label>
@@ -106,29 +119,36 @@ export class AddAppointmentComponent implements OnInit {
 
   onSubmit() {
     if (this.appointmentForm.valid) {
-
       const currentUser = this.authService.getCurrentUser();
-
       const appointmentData: Appointment = {
         ...this.appointmentForm.value,
-        userId: currentUser?.id 
+        userId: currentUser?.id
       };
-      
-  console.log(appointmentData);
-
+  
       if (this.isEditMode && this.appointmentId) {
         // Update existing appointment
         this.appointmentsService.updateAppointment(this.appointmentId, appointmentData).subscribe({
           next: () => this.router.navigate(['/appointments']),
-          error: (error) => console.error('Error updating appointment:', error)
+          error: (error) => {
+            console.error('Error updating appointment:', error);
+            this.showErrorAlert(error.error.message); // Show alert on error
+          }
         });
       } else {
         // Create new appointment
         this.appointmentsService.createAppointment(appointmentData).subscribe({
           next: () => this.router.navigate(['/appointments']),
-          error: (error) => console.error('Error creating appointment:', error)
+          error: (error) => {
+            console.error('Error creating appointment:', error);
+            this.showErrorAlert(error.error.message); // Show alert on error
+          }
         });
       }
     }
   }
+  
+  showErrorAlert(message: string): void {
+    alert(`Error: ${message}`);
+  }
+  
 }
